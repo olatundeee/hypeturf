@@ -96,7 +96,7 @@ function Login() {
         <div className="row login-form">
             <div className="col-lg-12 col-sm-12 col-md-12">
                 <div className="card" id="login-card">
-                    <div className="card-title text-center text-white" style={{padding: '2%', backgroundColor: "rgb(150, 75, 0)"}}>
+                    <div className="card-title text-center text-white" style={{padding: '2%', backgroundColor: "#1A2238"}}>
                         <h4>Login</h4>
                     </div>
                     <div className="card-body">
@@ -124,14 +124,14 @@ function Login() {
                             }} />
                         </div>
                         <div className="input-group mb-3" id="posting-login">
-                            <button type="button" className="btn" style={{backgroundColor: "rgb(150, 75, 0)", color: 'white'}}  id="login" onClick={() => {
+                            <button type="button" className="btn" style={{backgroundColor: "#1A2238", color: 'white'}}  id="login" onClick={() => {
                                 const username = document.getElementById('username').value
                                 const posting = document.getElementById('posting-key').value
                                 loginOp(username, posting) 
                             }}>Login</button>
                         </div>
                         <div className="input-group mb-3" id="keychain-login" style={{display: 'none'}}>
-                            <button type="button" className="btn" style={{backgroundColor: "rgb(150, 75, 0)", color: 'white'}} id="login-key" onClick={() => {
+                            <button type="button" className="btn" style={{backgroundColor: "#1A2238", color: 'white'}} id="login-key" onClick={() => {
                                 const username = document.getElementById('username').value
                                 keychainLoginOp(username) 
                             }}>Keychain Login</button>

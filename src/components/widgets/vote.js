@@ -27,7 +27,7 @@ Modal.setAppElement('#root');
 
 function Vote (v) {
     let [loading, setLoading] = React.useState(true);
-    let [color, setColor] = React.useState('rgb(150, 75, 0)');
+    let [color, setColor] = React.useState('#1A2238');
     let [modalIsOpen, setIsOpen] = React.useState(false);
     let [volume, setVolume] = React.useState([50])
     let props = v.props
@@ -84,7 +84,7 @@ function Vote (v) {
                 >
                     <div>
                         <span className="text-start">{volume}%</span>
-                        <span className="text-end"> <i style={{cursor: 'pointer', color: 'rgb(150, 75, 0)', backgroundColor: 'white'}} onClick={closeModal}><Icon.XCircle /></i></span>
+                        <span className="text-end"> <i style={{cursor: 'pointer', color: '#1A2238', backgroundColor: 'white'}} onClick={closeModal}><Icon.XCircle /></i></span>
                     </div>
                     <br />
 
@@ -115,14 +115,14 @@ function Vote (v) {
                             ...props.style,
                             height: '42px',
                             width: '42px',
-                            backgroundColor: 'rgb(150, 75, 0)'
+                            backgroundColor: '#1A2238'
                             }}
                         />
                         )}
                     />
                     
                     <br />
-                    <a className="btn btn-sm text-end" style={{backgroundColor: 'rgb(150, 75, 0)', color: 'white', cursor: 'pointer !important'}}><Icon.HandThumbsUp className="text-end" onClick={() => {
+                    <a className="btn btn-sm text-end" style={{backgroundColor: '#1A2238', color: 'white', cursor: 'pointer !important'}}><Icon.HandThumbsUp className="text-end" onClick={() => {
                         voteContent(props.author, props.permlink, props.voter, volume)
                         closeModal()
                     }} style={{display: bareDisplay, cursor: 'pointer'}} /></a>

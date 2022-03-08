@@ -36,12 +36,12 @@ function Comment (v) {
                         <div className="card-text text-start" id="comment-body-text" dangerouslySetInnerHTML={createMarkup(comment.body)} />
                         <hr />
                         <div>
-                            <a className="comment-author comment-action" href={"/u?user=" + comment.author} style={{cursor: 'pointer !important', color: 'rgb(150, 75, 0)', textDecoration: 'none !important', display: 'inline-flex', width: '50%',}}>
+                            <a className="comment-author comment-action" href={"/u?user=" + comment.author} style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important', display: 'inline-flex', width: '50%',}}>
                             <small>@{comment.author}</small></a>
                             <span className="pending-payout comment-action" style={{fontSize: '10px', display: 'inline-flex', paddingTop: '1%', width: '50%'}}><b className="text-center">{comment.pendingPayout}</b></span>
                         </div>
                     </div>
-                    <div className="card-footer comments-footer-area" style={{backgroundColor: "rgb(150, 75, 0)"}}>
+                    <div className="card-footer comments-footer-area" style={{backgroundColor: "#1A2238"}}>
                         <a className="vote-post text-white comment-action" style={{width: '50%', display: 'inline-flex'}}>
                             <Vote props={{
                                 author: comment.author,

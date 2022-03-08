@@ -23,7 +23,7 @@ let loggedInUser = localStorage.getItem('username') ? localStorage.getItem('user
 
 function Follow (v) {
     let [loading, setLoading] = React.useState(true);
-    let [color, setColor] = React.useState('rgb(150, 75, 0)');
+    let [color, setColor] = React.useState('#1A2238');
     let [modalIsOpen, setIsOpen] = React.useState(false);
     let [volume, setVolume] = React.useState([50])
     let props = v.props
@@ -39,7 +39,7 @@ function Follow (v) {
     let fillDisplay = `none`
     let loaderDisplay = `none`
 
-    let pulseColor = 'rgb(150, 75, 0)'
+    let pulseColor = '#1A2238'
 
     let followingStatus = props.followingStatus
     loaderDisplay = `inline-flex`
@@ -66,10 +66,10 @@ function Follow (v) {
             <span className="sweet-loading follow-loading" id={`${props.author}${props.followUser}followloader`} style={{display: 'none'}}>
                 <PulseLoader color={pulseColor} loading={loading} css={override} size={5} />
             </span>
-            <span className="badge badge-primary badge-pill follow-badge" id={`${props.author}${props.followUser}follower`} style={{cursor: 'pointer', backgroundColor: 'rgb(150, 75, 0)', padding: '6%', display: bareDisplay, cursor: 'pointer'}} onClick={() => {
+            <span className="badge badge-primary badge-pill follow-badge" id={`${props.author}${props.followUser}follower`} style={{cursor: 'pointer', backgroundColor: '#1A2238', padding: '6%', display: bareDisplay, cursor: 'pointer'}} onClick={() => {
                 followUser(props.followUser, props.author, loggedInUser)
             }}>Follow {(props.followCount)}</span>
-            <span className="badge badge-primary badge-pill follow-badge" id={`${props.author}${props.followUser}followed`} style={{cursor: 'default', backgroundColor: 'rgb(150, 75, 0)', padding: '6%', display: fillDisplay}} onClick={() => {
+            <span className="badge badge-primary badge-pill follow-badge" id={`${props.author}${props.followUser}followed`} style={{cursor: 'default', backgroundColor: '#1A2238', padding: '6%', display: fillDisplay}} onClick={() => {
                 //followUser(props.followUser, props.author, loggedInUser)
             }}>Following {(props.followCount)}</span>
         </>

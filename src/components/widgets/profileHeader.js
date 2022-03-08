@@ -43,7 +43,7 @@ function ProfileHeader(v) {
             </div>
             <hr />
             <div className="post-footer-area row" style={{color: 'white'}}>
-                <ul className="nav nav-tabs" style={{backgroundColor: 'rgb(150, 75, 0)', color: 'white'}}>
+                <ul className="nav nav-tabs" style={{backgroundColor: '#1A2238', color: 'white'}}>
                     <li className="nav-item">
                         <a className="nav-link" aria-current="page" href={`/u?user=${profile}`} style={{color: 'white'}}>Blog</a>
                     </li>

@@ -13,7 +13,7 @@ import ops from "../../services/hiveOps"
 
 function Reblog (v) {
     let [loading, setLoading] = React.useState(true);
-    let [color, setColor] = React.useState('rgb(150, 75, 0)');
+    let [color, setColor] = React.useState('#1A2238');
     let [modalIsOpen, setIsOpen] = React.useState(false);
     let [volume, setVolume] = React.useState([50])
     let props = v.props

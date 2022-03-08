@@ -35,7 +35,7 @@ const author = getUrlParameter('user')
 
 function New() {
     let [value, setValue] = useState("");
-    let [tags, setTags] =  useState(['ftest'])
+    let [tags, setTags] =  useState(['hypeturf'])
     let [communities, setCommunities] = useState([])
     let [chosenCommunity, setChosenCommunity]= useState('')
 
@@ -72,7 +72,7 @@ function New() {
         let permlink = colonpermlink.replace(/:/g, '');
         permlink = permlink.replace(/\\|\//g,'') ;
         const parentPermlink = chosenCommunity.length > 0 ? chosenCommunity : 'ftest'
-        const jsonMetadata = {tags, app: 'funda/v1' }
+        const jsonMetadata = {tags, app: 'hypeturf/v1' }
 
         const comment = {
             parent_author: parentAuthor,
@@ -85,7 +85,7 @@ function New() {
         };
 
         let benefactor_global = [
-            [0, {beneficiaries: [{account: 'spscontest', weight: 1100}]}]
+            [0, {beneficiaries: [{account: 'hypeturf', weight: 1100}]}]
         ];
 
 
@@ -192,7 +192,7 @@ function New() {
                     </div>
 
                     <div className="container mb-3 text-right">
-                        <a className="btn" id="submitPost" style={{backgroundColor: "rgb(150, 75, 0)", color: 'white'}} onClick={() => {
+                        <a className="btn" id="submitPost" style={{backgroundColor: "#1A2238", color: 'white'}} onClick={() => {
                             handlePostSubmit()
                         }}>Submit</a>
                     </div>

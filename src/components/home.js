@@ -48,7 +48,7 @@ function Posts() {
         value: 'trending'
     })
     let [loading, setLoading] = React.useState(true);
-    let [color, setColor] = React.useState('rgb(150, 75, 0)');
+    let [color, setColor] = React.useState('#1A2238');
     let [coverImage, setCoverImage] = React.useState('/img/default_avatar.png')
   
     let refPosts = []
@@ -188,7 +188,8 @@ function Posts() {
                 }
                 summary = summary.replace(/<center>/g, '').replace(/<\/center>/g, '').replace(/<div className="text-justify">/g, '').replace(/<\/div>/g, '').replace(/<div className="pull-left">/g, '').replace(/<div className="pull-right">/g, '').replace(/<hr>/g, '') 
 
-let cover = coverImage;                if (json) {
+                let cover = coverImage;
+                if (json) {
                     json = JSON.parse(json)
                             await newPosts.push({
                                 title: title,
@@ -212,9 +213,9 @@ let cover = coverImage;                if (json) {
     React.useEffect(() => {
         async function getPosts() {
             try {
-                let theTrendingPosts = await hive.api.getDiscussionsByTrendingAsync({ limit : 30, tag : "" });
-                let theNewPosts = await hive.api.getDiscussionsByCreatedAsync({ limit : 20, tag : "" });
-                let theHotPosts = await hive.api.getDiscussionsByHotAsync({ limit : 20, tag : "" });
+                let theTrendingPosts = await hive.api.getDiscussionsByTrendingAsync({ limit : 40, tag : "" });
+                let theNewPosts = await hive.api.getDiscussionsByCreatedAsync({ limit : 80, tag : "" });
+                let theHotPosts = await hive.api.getDiscussionsByHotAsync({ limit : 80, tag : "" });
                 await sortContents(theTrendingPosts, theHotPosts, theNewPosts)
                 await setPosts(trendingPosts)
                 await setPostsHot(hotPosts)
@@ -229,11 +230,11 @@ let cover = coverImage;                if (json) {
         getPosts()
     }, []);
 
-    /*async function reloadContent (selectedOption) {
+    async function reloadContent (selectedOption) {
 
         document.getElementById('hideOnLoad').style.display = 'block'
-
-        await setPostsClass({value: selectedOption.target.value})
+        setPosts([])
+        setPostsClass({value: selectedOption.target.value})
         let theTrendingPosts = await hive.api.getDiscussionsByTrendingAsync({ limit : 30, tag : "" });
         let theNewPosts = await hive.api.getDiscussionsByCreatedAsync({ limit : 30, tag : "" });
         let theHotPosts = await hive.api.getDiscussionsByHotAsync({ limit : 30, tag : "" });
@@ -241,43 +242,39 @@ let cover = coverImage;                if (json) {
         await sortContents(theTrendingPosts, theHotPosts, theNewPosts)
 
         if (selectedOption.target.value === 'hot') {
-            await sortContents(theTrendingPosts, theHotPosts, theNewPosts)
             setPosts(hotPosts)
             setPostsHot(trendingPosts)
             setPostsNew(newPosts)
-            document.getElementById('newHeader').innerHTML = 'New'
-            document.getElementById('hotHeader').innerHTML = 'Trending'
+            document.getElementById('newHeader').innerHTML = '<p>New</p>'
+            document.getElementById('hotHeader').innerHTML = '<p>Trending</p>'
         }
         if (selectedOption.target.value === 'new') {
-            await sortContents(theTrendingPosts, theHotPosts, theNewPosts)
             setPosts(newPosts)
             setPostsHot(hotPosts)
             setPostsNew(trendingPosts)
-            document.getElementById('hotHeader').innerHTML = 'Hot'
-            document.getElementById('newHeader').innerHTML = 'Trending'
+            document.getElementById('hotHeader').innerHTML = '<p>Hot</p>'
+            document.getElementById('newHeader').innerHTML = '<p>Trending</p>'
         }
         if (selectedOption.target.value === 'trending') {
-            await sortContents(theTrendingPosts, theHotPosts, theNewPosts)
             setPosts(trendingPosts)
             setPostsHot(hotPosts)
             setPostsNew(newPosts)
-            document.getElementById('hotHeader').innerHTML = 'Hot'
-            document.getElementById('newHeader').innerHTML = 'New'
+            document.getElementById('hotHeader').innerHTML = '<p>Hot</p>'
+            document.getElementById('newHeader').innerHTML =  '<p>New</p>'
         }
 
         if (selectedOption.target.value === 'feed') {
-            await sortContents(theFeedPosts, theHotPosts, theNewPosts)
             setPosts(trendingPosts)
             setPostsHot(hotPosts)
             setPostsNew(newPosts)
-            document.getElementById('hotHeader').innerHTML = 'Hot'
-            document.getElementById('newHeader').innerHTML = 'New'
+            document.getElementById('hotHeader').innerHTML = '<p>Hot</p>'
+            document.getElementById('newHeader').innerHTML =  '<p>New</p>'
         }
 
         document.getElementById('hideOnLoad').style.display = 'none'
     }
 
-    const { selectedOption } = postsClass*/
+    const { selectedOption } = postsClass
 
     function createMarkup(params) {
         return {__html: params};
@@ -286,7 +283,7 @@ let cover = coverImage;                if (json) {
     return (
         <div className="posts" id="page-content">
             <div className="row trending-posts">
-                {/*<div className="col-lg-4 col-sm-12 col-md-4">
+                <div className="col-lg-4 col-sm-12 col-md-4">
                     <div className="section-title text-start" style={{margin: '40px 0'}}>
                         <select value={postsClass.value} onChange={reloadContent}>
                             {postOptions.map((option) => (
@@ -294,7 +291,7 @@ let cover = coverImage;                if (json) {
                             ))}
                         </select>
                     </div>
-                </div>*/}
+                </div>
                 <br />
                 <hr />
                 <br />
@@ -302,13 +299,20 @@ let cover = coverImage;                if (json) {
                 <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block post">
                     <div className="card mb-3" style={{margin: '5% 0'}}>
                         <div className="list-group">
+                            <a href="#" className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5%'}} id="newHeader">
+                                <p>New</p>
+                            </a>
                             {newPostsArr.map((post) => (
                                 <a href={`/post?permlink=${post.permlink}&author=${post.author}`} className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5%'}}>
                                     <div className="d-flex w-100 justify-content-between">
-                                        <h6 className="mb-1"  style={{cursor: 'pointer !important', color: 'rgb(150, 75, 0)', textDecoration: 'none !important'}}>{post.title}</h6>
+                                        <h6 className="mb-1"  style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}>{post.title}</h6>
+                                    </div>
+                                    <hr />
+                                    <div className="d-flex w-100 justify-content-between">
+                                        <img className="card-img-top" src={post.cover}  height={post.postImgHeight} alt="Card image cap" />
                                     </div>
                                     <div className="d-flex w-100 justify-content-between align-items-end" style={{marginTop: '10%'}}>
-                                        <a href={"/u?user=" + post.author} style={{cursor: 'pointer !important', color: 'rgb(150, 75, 0)', textDecoration: 'none !important'}}>
+                                        <a href={"/u?user=" + post.author} style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}>
                                             <small className="text-muted">@{post.author}</small>
                                         </a>
                                         <small className="text-muted">
@@ -330,7 +334,7 @@ let cover = coverImage;                if (json) {
                         <PulseLoader color={color} loading={loading} css={override} size={50} />
                     </div>
                     <div className="card-body">
-                        <h5 className="new post-title"  style={{color: 'rgb(150, 75, 0)', textDecoration: 'none !important'}}>Posts</h5>
+                        <h5 className="new post-title"  style={{color: '#1A2238', textDecoration: 'none !important'}}>Posts</h5>
                     </div>
                     <div id="postsContainer">
                         {posts.map((post) => (
@@ -343,7 +347,7 @@ let cover = coverImage;                if (json) {
                                     </div>
                                         
                                     <div className="text-start col-md-9">
-                                        <h5 className="card-title post-title-wrap"><a href={`/post?permlink=${post.permlink}&author=${post.author}`} style={{cursor: 'pointer !important', color: 'rgb(150, 75, 0)', textDecoration: 'none !important'}} className="post-title">{post.title}</a></h5>
+                                        <h5 className="card-title post-title-wrap"><a href={`/post?permlink=${post.permlink}&author=${post.author}`} style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}} className="post-title">{post.title}</a></h5>
                                     </div>
 
                                     <p className="card-text" style={{marginTop: '5%'}}>
@@ -357,11 +361,11 @@ let cover = coverImage;                if (json) {
 
                                         <small className="text-muted" style={{
                                             marginLeft: "50%"
-                                        }}><a href={"/u?user=" + post.author} style={{cursor: 'pointer !important', color: 'rgb(150, 75, 0)', textDecoration: 'none !important'}}>@{post.author}</a> </small>
+                                        }}><a href={"/u?user=" + post.author} style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}>@{post.author}</a> </small>
                                     </p>
                                 </div>
                                 
-                                <div className="card-footer post-footer-area row" style={{backgroundColor: "rgb(150, 75, 0)"}}>
+                                <div className="card-footer post-footer-area row" style={{backgroundColor: "#1A2238"}}>
                                     <div className="vote-post text-white col" id={`${post.author}${post.permlink}`}>
                                         <Vote props={{
                                             author: post.author,
@@ -392,13 +396,20 @@ let cover = coverImage;                if (json) {
                 <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block post">
                     <div className="card mb-3" style={{margin: '5% 0'}}>
                         <div className="list-group">
+                            <a href="#" className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5%'}} id="hotHeader">
+                                <p>Hot</p>
+                            </a>
                             {hotPostsArr.map((post) => (
                                 <a href={`/post?permlink=${post.permlink}&author=${post.author}`} className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5%'}}>
                                     <div className="d-flex w-100 justify-content-between">
-                                        <h6 className="mb-1"  style={{cursor: 'pointer !important', color: 'rgb(150, 75, 0)', textDecoration: 'none !important'}}>{post.title}</h6>
+                                        <h6 className="mb-1"  style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}>{post.title}</h6>
+                                    </div>
+                                    <hr />
+                                    <div className="d-flex w-100 justify-content-between">
+                                        <img className="card-img-top" src={post.cover}  height={post.postImgHeight} alt="Card image cap" />
                                     </div>
                                     <div className="d-flex w-100 justify-content-between align-items-end" style={{marginTop: '10%'}}>
-                                        <a href={"/u?user=" + post.author} style={{cursor: 'pointer !important', color: 'rgb(150, 75, 0)', textDecoration: 'none !important'}}>
+                                        <a href={"/u?user=" + post.author} style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}>
                                             <small className="text-muted">@{post.author}</small>
                                         </a>
                                         <small className="text-muted">

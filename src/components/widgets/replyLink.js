@@ -31,7 +31,7 @@ function finishPosting() {
 function ReplyLink (v) {
     let [replyModalIsOpen, setIsOpen] = React.useState(false);
     let props = v.props
-    let color = props.isComment === true ? '#fff' : 'rgb(150, 75, 0)'
+    let color = props.isComment === true ? '#fff' : '#1A2238'
 
     function openModal() {
         setIsOpen(true);
@@ -117,14 +117,14 @@ function ReplyLink (v) {
                         contentLabel="Example Modal"
                     >
                         <div>
-                            <span className="text-end"> <i style={{cursor: 'pointer', color: 'rgb(150, 75, 0)', backgroundColor: 'white'}} onClick={closeModal}><Icon.XCircle /></i></span>
+                            <span className="text-end"> <i style={{cursor: 'pointer', color: '#1A2238', backgroundColor: 'white'}} onClick={closeModal}><Icon.XCircle /></i></span>
 
                             <div className='replyBox' style={{width: '100% !important'}}>
                                 <textarea type="text" id="reply-comment-box" name="comment-input-box" style={{borderRadius: '25px', width: '90%', height: '200px', margin: '5%', padding: '3%'}} />
                             </div>
                         </div>
                         <br />
-                        <a className="btn btn-sm text-end" style={{backgroundColor: 'rgb(150, 75, 0)', color: 'white', cursor: 'pointer !important', marginBottom: '5%'}}  onClick={() => {
+                        <a className="btn btn-sm text-end" style={{backgroundColor: '#1A2238', color: 'white', cursor: 'pointer !important', marginBottom: '5%'}}  onClick={() => {
                             sendReply()
                             //closeModal()
                         }}>Reply</a>

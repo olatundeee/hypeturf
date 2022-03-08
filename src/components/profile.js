@@ -66,7 +66,7 @@ function Posts(v) {
                                     </div>
                                     
                                     <div className="text-start col-md-9">
-                                        <h5 className="card-title post-title-wrap"><a href={`/post?permlink=${post.permlink}&author=${post.author}`} style={{cursor: 'pointer !important', color: 'rgb(150, 75, 0)', textDecoration: 'none !important'}} className="post-title">{post.title}</a></h5>
+                                        <h5 className="card-title post-title-wrap"><a href={`/post?permlink=${post.permlink}&author=${post.author}`} style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}} className="post-title">{post.title}</a></h5>
                                     </div>
                                                     
                                     {
@@ -79,11 +79,11 @@ function Posts(v) {
                                             />
                                         </small>
                                     </p>
-                                    <p className="card-text"><small className="text-muted text-start"><a href={"/u?user=" + post.author} style={{cursor: 'pointer !important', color: 'rgb(150, 75, 0)', textDecoration: 'none !important'}}>@{post.author}</a> </small></p>
+                                    <p className="card-text"><small className="text-muted text-start"><a href={"/u?user=" + post.author} style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}>@{post.author}</a> </small></p>
                                 </div>
                             </div>
                             <div className="col-md-12">
-                                <div className="card-footer post-footer-area row" style={{backgroundColor: "rgb(150, 75, 0)"}}>
+                                <div className="card-footer post-footer-area row" style={{backgroundColor: "#1A2238"}}>
                                     <div className="vote-post text-white col">
                                         <Vote props={{
                                             author: post.author,
@@ -120,7 +120,7 @@ function Posts(v) {
 function Profile() {
     const [posts, setPosts] = React.useState([]);
     let [loading, setLoading] = React.useState(true);
-    let [color, setColor] = React.useState('rgb(150, 75, 0)');
+    let [color, setColor] = React.useState('#1A2238');
     let [followStatus, setFollowStatus] = React.useState(false);
     let [followCount, setFollowCount] = React.useState(0);
     let [coverImage, setCoverImage] = React.useState('/img/default_avatar.png')
