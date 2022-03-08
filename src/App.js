@@ -59,10 +59,9 @@ function logout() {
 
 function App() {
   
-  if (!window.location.protocol.includes('https://')) {
+  if (window.location.protocol === 'http:') {
     let currentUrl = window.location.href
-    currentUrl.replace('http://', 'https://')
-    window.location.replace(currentUrl)
+    window.location.replace('https://' + currentUrl.split('://')[1])
   }
 
   return (
