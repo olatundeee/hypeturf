@@ -12,8 +12,9 @@ import UserPosts from "./components/userPosts";
 import * as Icon from 'react-bootstrap-icons';
 
 const restrictedPaths = ['/new']
+let token = localStorage.getItem('token')
+
 const NavLinks = function() {
-  let token = localStorage.getItem('token')
   if (token !== null) {
     const username = localStorage.getItem('username')
     return (<>
@@ -57,6 +58,13 @@ function logout() {
 };
 
 function App() {
+  
+  if (!window.location.protocol.includes('https://')) {
+    let currentUrl = window.location.href
+    currentUrl.replace('http://', 'https://')
+    window.location.replace(currentUrl)
+  }
+
   return (
       <div className="App">
         <nav className="navbar sticky-top navbar-expand-lg navbar-dark" style={{backgroundColor: "#1A2238"}}>
