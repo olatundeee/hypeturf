@@ -23,6 +23,8 @@ const customStyles = {
     },
 };
 
+const hive = require("@hiveio/hive-js")
+
 Modal.setAppElement('#root');
 
 function Vote (v) {
@@ -30,8 +32,8 @@ function Vote (v) {
     let [color, setColor] = React.useState('#1A2238');
     let [modalIsOpen, setIsOpen] = React.useState(false);
     let [volume, setVolume] = React.useState([50])
+    let [voteCount, setVoteCount] = React.useState(0)
     let props = v.props
-
     
     // Can be a string as well. Need to ensure each key-value pair ends with ;
     let override = css`
@@ -55,6 +57,20 @@ function Vote (v) {
     function closeModal() {
         setIsOpen(false);
     }
+
+    React.useEffect(() => {
+        async function getVoteCount() {
+            try {
+                let theContent = await hive.api.getContentAsync(props.author, props.permlink);
+                setVoteCount(theContent.active_votes.length)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+
+        getVoteCount()
+    }, [])
 
 
 
@@ -129,6 +145,7 @@ function Vote (v) {
                 </Modal>
             </div>
             <Icon.HandThumbsUpFill id={`${props.author}${props.permlink}rvote`} style={{display: fillDisplay}} />
+            <small><sub>{voteCount}</sub></small>
         </>
     )
 }

@@ -6,8 +6,13 @@ import {keychain, isKeychainInstalled, hasKeychainBeenUsed} from '@hiveio/keycha
 const hive = require("@hiveio/hive-js")
 
 async function loginOp(username, key) {
-    const signIn = await ops.getToken(username, key);
-    await callback(signIn);
+    try {
+        const signIn = await ops.getToken(username, key);
+        await callback(signIn);        
+    } catch (error) {
+        console.log(error)
+        alert('Error encountered')
+    }
 }
 async function callback(data) {
     if (data.auth == true) {
@@ -21,42 +26,47 @@ async function callback(data) {
     }
 }
 async function keychainLoginOp(username) {
-    const accountData = await hive.api.getAccountsAsync([username])
-    let auth = accountData[0].posting.account_auths.filter(el => el[0] === 'speak.bounties');
-    // All good
-    console.log(auth)
+    try{
+        const accountData = await hive.api.getAccountsAsync([username])
+        let auth = accountData[0].posting.account_auths.filter(el => el[0] === 'speak.bounties');
+        // All good
+        console.log(auth)
 
-    const {success, msg, cancel, notInstalled, notActive} = await keychain(window, 'requestTransfer', 'test', username, 5,  'test memo', 'HIVE')
-    if(isKeychainInstalled) {
-        // do your thing
-        if (auth.length === 0) {
-            const response = await keychain(window, 'requestAddAccountAuthority', username, "speak.bounties", "posting", 1);
+        const {success, msg, cancel, notInstalled, notActive} = await keychain(window, 'requestTransfer', 'test', username, 5,  'test memo', 'HIVE')
+        if(isKeychainInstalled) {
+            // do your thing
+            if (auth.length === 0) {
+                const response = await keychain(window, 'requestAddAccountAuthority', username, "speak.bounties", "posting", 1);
 
-            if (response.success === true){
+                if (response.success === true){
+                    const fetchMemo = await ops.fetchMemo(username)
+                    console.log(fetchMemo)
+                    keychainCallback(fetchMemo)
+                }
+                else {
+                    console.log({error : "Keychain error"});
+                }
+            }
+            else {
                 const fetchMemo = await ops.fetchMemo(username)
                 console.log(fetchMemo)
                 keychainCallback(fetchMemo)
             }
-            else {
-                console.log({error : "Keychain error"});
+        }
+        // User didn't cancel, so something must have happened
+        else if(!cancel) {
+            if(notActive) {
+                alert('Please allow Keychain to access this website')
+            } else if(notInstalled) {
+                alert('Please install Keychain')
+            } else {
+                //console.log(error.message)
+                alert('Error encountered')
             }
         }
-        else {
-            const fetchMemo = await ops.fetchMemo(username)
-            console.log(fetchMemo)
-            keychainCallback(fetchMemo)
-        }
-    }
-    // User didn't cancel, so something must have happened
-    else if(!cancel) {
-        if(notActive) {
-            alert('Please allow Keychain to access this website')
-        } else if(notInstalled) {
-            alert('Please install Keychain')
-        } else {
-            //console.log(error.message)
-            alert('Error encountered')
-        }
+    } catch (error) {
+        console.log(error)
+        alert('Error encountered')
     }
 }
 async function keychainCallback(memo) {

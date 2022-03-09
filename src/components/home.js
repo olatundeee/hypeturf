@@ -41,6 +41,7 @@ const override = css`
 let loggedInUser = localStorage.getItem('username') ? localStorage.getItem('username') : null
 
 function Posts() {
+    let [middlePosts, setMiddlePosts] = React.useState([]);
     let [posts, setPosts] = React.useState([]);
     let [newPostsArr, setPostsNew] = React.useState([]);
     let [hotPostsArr, setPostsHot] = React.useState([]);
@@ -213,13 +214,14 @@ function Posts() {
     React.useEffect(() => {
         async function getPosts() {
             try {
-                let theTrendingPosts = await hive.api.getDiscussionsByTrendingAsync({ limit : 40, tag : "" });
-                let theNewPosts = await hive.api.getDiscussionsByCreatedAsync({ limit : 80, tag : "" });
-                let theHotPosts = await hive.api.getDiscussionsByHotAsync({ limit : 80, tag : "" });
+                let theTrendingPosts = await hive.api.getDiscussionsByTrendingAsync({ limit : 20, tag : "" });
+                let theNewPosts = await hive.api.getDiscussionsByCreatedAsync({ limit : 20, tag : "" });
+                let theHotPosts = await hive.api.getDiscussionsByHotAsync({ limit : 20, tag : "" });
                 await sortContents(theTrendingPosts, theHotPosts, theNewPosts)
-                await setPosts(trendingPosts)
-                await setPostsHot(hotPosts)
-                await setPostsNew(newPosts)
+                setPosts(trendingPosts)
+                setPostsHot(hotPosts)
+                setPostsNew(newPosts)
+                setMiddlePosts(trendingPosts)
                 document.getElementById('hideOnLoad').style.display = 'none'
             } catch (error) {
                 console.log(error)
@@ -233,42 +235,21 @@ function Posts() {
     async function reloadContent (selectedOption) {
 
         document.getElementById('hideOnLoad').style.display = 'block'
-        setPosts([])
+        setMiddlePosts([])
         setPostsClass({value: selectedOption.target.value})
-        let theTrendingPosts = await hive.api.getDiscussionsByTrendingAsync({ limit : 30, tag : "" });
-        let theNewPosts = await hive.api.getDiscussionsByCreatedAsync({ limit : 30, tag : "" });
-        let theHotPosts = await hive.api.getDiscussionsByHotAsync({ limit : 30, tag : "" });
-        let theFeedPosts =  localStorage.getItem('username') !== null ? await hive.api.getDiscussionsByFeedAsync({ limit : 30, tag : localStorage.getItem('username') }) : await hive.api.getDiscussionsByTrendingAsync({ limit : 30, tag : "" });
-        await sortContents(theTrendingPosts, theHotPosts, theNewPosts)
 
         if (selectedOption.target.value === 'hot') {
-            setPosts(hotPosts)
-            setPostsHot(trendingPosts)
-            setPostsNew(newPosts)
-            document.getElementById('newHeader').innerHTML = '<p>New</p>'
-            document.getElementById('hotHeader').innerHTML = '<p>Trending</p>'
+            setMiddlePosts(hotPostsArr)
         }
         if (selectedOption.target.value === 'new') {
-            setPosts(newPosts)
-            setPostsHot(hotPosts)
-            setPostsNew(trendingPosts)
-            document.getElementById('hotHeader').innerHTML = '<p>Hot</p>'
-            document.getElementById('newHeader').innerHTML = '<p>Trending</p>'
+            setMiddlePosts(newPostsArr)
         }
         if (selectedOption.target.value === 'trending') {
-            setPosts(trendingPosts)
-            setPostsHot(hotPosts)
-            setPostsNew(newPosts)
-            document.getElementById('hotHeader').innerHTML = '<p>Hot</p>'
-            document.getElementById('newHeader').innerHTML =  '<p>New</p>'
+            setMiddlePosts(posts)
         }
 
         if (selectedOption.target.value === 'feed') {
-            setPosts(trendingPosts)
-            setPostsHot(hotPosts)
-            setPostsNew(newPosts)
-            document.getElementById('hotHeader').innerHTML = '<p>Hot</p>'
-            document.getElementById('newHeader').innerHTML =  '<p>New</p>'
+            setMiddlePosts(posts)
         }
 
         document.getElementById('hideOnLoad').style.display = 'none'
@@ -309,7 +290,7 @@ function Posts() {
                                     </div>
                                     <hr />
                                     <div className="d-flex w-100 justify-content-between">
-                                        <img className="card-img-top" src={post.cover}  height={post.postImgHeight} alt="Card image cap" />
+                                        <img className="card-img-top" src={post.cover}  height={'150px'} alt="Card image cap" />
                                     </div>
                                     <div className="d-flex w-100 justify-content-between align-items-end" style={{marginTop: '10%'}}>
                                         <a href={"/u?user=" + post.author} style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}>
@@ -337,7 +318,7 @@ function Posts() {
                         <h5 className="new post-title"  style={{color: '#1A2238', textDecoration: 'none !important'}}>Posts</h5>
                     </div>
                     <div id="postsContainer">
-                        {posts.map((post) => (
+                        {middlePosts.map((post) => (
                             <div className="card mb-3 post" key={post.permlink} data-author={post.author}>
                                 <img className="card-img-top" src={post.cover}  height={post.postImgHeight} alt="Card image cap" />
                                 <div className="card-body row">
@@ -406,7 +387,7 @@ function Posts() {
                                     </div>
                                     <hr />
                                     <div className="d-flex w-100 justify-content-between">
-                                        <img className="card-img-top" src={post.cover}  height={post.postImgHeight} alt="Card image cap" />
+                                        <img className="card-img-top" src={post.cover}  height={'150px'} alt="Card image cap" />
                                     </div>
                                     <div className="d-flex w-100 justify-content-between align-items-end" style={{marginTop: '10%'}}>
                                         <a href={"/u?user=" + post.author} style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}>

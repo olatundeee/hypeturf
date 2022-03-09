@@ -59,16 +59,21 @@ function logout() {
 
 function App() {
   
-  if (window.location.protocol === 'http:') {
+  /*if (window.location.protocol === 'http:') {
     let currentUrl = window.location.href
     window.location.replace('https://' + currentUrl.split('://')[1])
-  }
+  }*/
 
   return (
       <div className="App">
         <nav className="navbar sticky-top navbar-expand-lg navbar-dark" style={{backgroundColor: "#1A2238"}}>
           <div className="container-fluid">
-          <a className="navbar-brand" href="/" style={{fontFamily: 'Brush Script MT', fontSize: '30px'}}><img src={'https://i.ibb.co/NCfX9KZ/logo.png'} /></a>
+          <a className="navbar-brand" href="/" style={{fontFamily: 'Parisienne, cursive', fontSize: '40px', fontWeight: '300'}}>
+            {
+              //<img src={'https://i.ibb.co/NCfX9KZ/logo.png'} />
+            }
+            HypeTurf
+          </a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>

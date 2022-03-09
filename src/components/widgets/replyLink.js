@@ -46,12 +46,13 @@ function ReplyLink (v) {
         let parent_author = props.parent_author
         let parent_permlink = props.parent_permlink
         let body = document.getElementById('reply-comment-box').value;
-        let jsonMetadata = {tags: ['funda'], app: 'funda/v1' }
+        let jsonMetadata = {tags: ['hypeturf'], app: 'hypeturf/v1' }
         let title = props.title !== undefined && props.title.length > 0 ? props.title : ''
         let permlink = randomstring.generate({
             length: 8,
             charset: 'alphabetic'
         }).toLowerCase();
+        body = body + '<p>Posted from <a href="https://www.hypeturf.io">HypeTurf</a></p>';
 
         const comment = {
             parent_author: parent_author !== undefined && parent_author.length > 0 ? parent_author : '',

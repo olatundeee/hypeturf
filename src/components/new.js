@@ -63,7 +63,7 @@ function New() {
    
     async function handlePostSubmit() {
         const title = document.getElementById('postTitle').value
-        const body = value;
+        let body = value;
         const parentAuthor = '';
         const parentTitleLower = title.toLowerCase();         
         const parentPermlinkInit = parentTitleLower.replace(/ /g, '-');
@@ -73,6 +73,7 @@ function New() {
         permlink = permlink.replace(/\\|\//g,'') ;
         const parentPermlink = chosenCommunity.length > 0 ? chosenCommunity : 'ftest'
         const jsonMetadata = {tags, app: 'hypeturf/v1' }
+        body = body + '<p>Posted from <a href="https://www.hypeturf.io">HypeTurf</a></p>';
 
         const comment = {
             parent_author: parentAuthor,

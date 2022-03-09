@@ -7,7 +7,7 @@ import { embedNode as EmbeddedPlayerEmbedNode, preprocessHtml } from '../compone
 import { extractMetadata as youTubeId } from '../components/widgets/EmbeddedPlayers/youtube';
 
 export const getPhishingWarningMessage = () =>  'Looks like a phishing link';
-export const getExternalLinkWarningMessage = () => 'This link will take you awy from Funda'
+export const getExternalLinkWarningMessage = () => 'This link will take you away from HypeTurf'
 
 const noop = () => {};
 const DOMParser = new xmldom.DOMParser({

@@ -577,6 +577,7 @@ function Post() {
                     <div className="card-body post-card-body">
                         <div className="card-text text-start" id="post-body-text" dangerouslySetInnerHTML={createMarkup(post.body)} />
                         <div className="card-text text-start">
+                            <hr />
                             <ReplyLink props={{
                                 id: permlink + author,
                                 parent_author: author,
@@ -584,6 +585,7 @@ function Post() {
                                 isComment: false,
                                 title: post.title
                             }} />
+                            <hr />
                         </div>
                     </div>
                     
