@@ -277,7 +277,7 @@ function Posts() {
                 <hr />
                 <br />
                 <br />
-                <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block post">
+                <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block" style={{width: '22%'}}>
                     <div className="card mb-3" style={{margin: '5% 0'}}>
                         <div className="list-group">
                             <a href="#" className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5%'}} id="newHeader">
@@ -310,7 +310,7 @@ function Posts() {
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-6 col-sm-12 col-md-12 post">
+                <div className="col-lg-6 col-sm-12 col-md-12">
                     <div className="sweet-loading text-center" id="hideOnLoad" style={{marginTop: '15%'}}>
                         <PulseLoader color={color} loading={loading} css={override} size={50} />
                     </div>
@@ -374,7 +374,7 @@ function Posts() {
                         ))}
                     </div>
                 </div>
-                <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block post">
+                <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block" style={{width: '22%'}}>
                     <div className="card mb-3" style={{margin: '5% 0'}}>
                         <div className="list-group">
                             <a href="#" className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5%'}} id="hotHeader">

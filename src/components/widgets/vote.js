@@ -145,7 +145,7 @@ function Vote (v) {
                 </Modal>
             </div>
             <Icon.HandThumbsUpFill id={`${props.author}${props.permlink}rvote`} style={{display: fillDisplay}} />
-            <small><sub>{voteCount}</sub></small>
+            <div><sub>{voteCount}</sub></div>
         </>
     )
 }
