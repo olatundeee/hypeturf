@@ -38,10 +38,33 @@ const override = css`
   border-color: red;
 `;
 
+let token = localStorage.getItem('token')
 let loggedInUser = localStorage.getItem('username') ? localStorage.getItem('username') : null
+
+const Jumbotron = function () {
+    if (token === null) {
+      return (
+        <div class="p-5 text-white" style={{backgroundColor: '#1A2238'}}>
+            <h4>Get cryptocurrency rewards on <a href="https://hive.io" target="_blank" style={{color: '#e9425f', textDecoration: 'none !important'}}>Hive</a> by creating content on our website. Click the links below to login or signup</h4>
+            <p>Click the <a href="https://hive.io" target="_blank" style={{color: '#e9425f', textDecoration: 'none !important'}}>link</a> to learn more about <a href="https://hive.io" target="_blank" style={{color: '#e9425f', textDecoration: 'none !important'}}>Hive</a></p>
+            <p>If you are new to <a href="https://hive.io" target="_blank" style={{color: '#e9425f', textDecoration: 'none !important'}}>Hive</a> checkout the <a href="/u?user=newbies-guide" target="_blank" style={{color: '#e9425f', textDecoration: 'none !important'}}>newbies guide for help</a></p>
+            <div>
+                <span style={{margin: '3%'}}><a href="/login" className="btn btn-lg" style={{backgroundColor: "white", color: '#1A2238'}}>Login</a></span>
+                <span style={{margin: '5% 1%'}}><a href="https://signup.hive.io" className="btn btn-lg" style={{backgroundColor: "white", color: '#1A2238'}} target="_blank">Signup</a></span>
+            </div>
+        </div>
+      )
+    }
+    
+    if (token !== null) {
+        return null
+    }
+}
 
 function Posts() {
     let [middlePosts, setMiddlePosts] = React.useState([]);
+    let [sidePostsOne, setSideOnePosts] = React.useState([]);
+    let [sidePostsTwo, setSideTwoPosts] = React.useState([]);
     let [posts, setPosts] = React.useState([]);
     let [newPostsArr, setPostsNew] = React.useState([]);
     let [hotPostsArr, setPostsHot] = React.useState([]);
@@ -222,6 +245,8 @@ function Posts() {
                 setPostsHot(hotPosts)
                 setPostsNew(newPosts)
                 setMiddlePosts(trendingPosts)
+                setSideOnePosts(newPosts)
+                setSideTwoPosts(hotPosts)
                 document.getElementById('hideOnLoad').style.display = 'none'
             } catch (error) {
                 console.log(error)
@@ -240,16 +265,32 @@ function Posts() {
 
         if (selectedOption.target.value === 'hot') {
             setMiddlePosts(hotPostsArr)
+            setSideTwoPosts(posts)
+            document.getElementById('hotHeader').innerHTML = '<p>Trending</p>'
+            setSideOnePosts(newPostsArr)
+            document.getElementById('newHeader').innerHTML = '<p>New</p>'
         }
         if (selectedOption.target.value === 'new') {
             setMiddlePosts(newPostsArr)
+            setSideOnePosts(posts)
+            document.getElementById('newHeader').innerHTML = '<p>Trending</p>'
+            setSideTwoPosts(hotPostsArr)
+            document.getElementById('hotHeader').innerHTML = '<p>Hot</p>'
         }
         if (selectedOption.target.value === 'trending') {
             setMiddlePosts(posts)
+            setSideOnePosts(newPostsArr)
+            document.getElementById('newHeader').innerHTML = '<p>New</p>'
+            setSideTwoPosts(hotPostsArr)
+            document.getElementById('hotHeader').innerHTML = '<p>Hot</p>'
         }
 
         if (selectedOption.target.value === 'feed') {
             setMiddlePosts(posts)
+            setSideOnePosts(newPostsArr)
+            document.getElementById('newHeader').innerHTML = '<p>New</p>'
+            setSideTwoPosts(hotPostsArr)
+            document.getElementById('hotHeader').innerHTML = '<p>Hot</p>'
         }
 
         document.getElementById('hideOnLoad').style.display = 'none'
@@ -263,6 +304,7 @@ function Posts() {
 
     return (
         <div className="posts" id="page-content">
+            <Jumbotron />
             <div className="row trending-posts">
                 <div className="col-lg-4 col-sm-12 col-md-4">
                     <div className="section-title text-start" style={{margin: '40px 0'}}>
@@ -278,13 +320,13 @@ function Posts() {
                 <br />
                 <br />
                 <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block" style={{width: '22%'}}>
-                    <div className="card mb-3" style={{margin: '5% 0'}}>
+                    <div className="card border-0 mb-3" style={{margin: '5% 0'}}>
                         <div className="list-group">
-                            <a href="#" className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5%'}} id="newHeader">
+                            <a href="#" className="list-group-item list-group-item-action flex-column align-items-start border-0" style={{padding: '5%'}} id="newHeader">
                                 <p>New</p>
                             </a>
-                            {newPostsArr.map((post) => (
-                                <a href={`/post?permlink=${post.permlink}&author=${post.author}`} className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5%'}}>
+                            {sidePostsOne.map((post) => (
+                                <a href={`/post?permlink=${post.permlink}&author=${post.author}`} className="list-group-item list-group-item-action flex-column align-items-start border-0" style={{padding: '5%'}}>
                                     <div className="d-flex w-100 justify-content-between">
                                         <h6 className="mb-1"  style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}>{post.title}</h6>
                                     </div>
@@ -375,13 +417,13 @@ function Posts() {
                     </div>
                 </div>
                 <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block" style={{width: '22%'}}>
-                    <div className="card mb-3" style={{margin: '5% 0'}}>
+                    <div className="card border-0 mb-3" style={{margin: '5% 0'}}>
                         <div className="list-group">
-                            <a href="#" className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5%'}} id="hotHeader">
+                            <a href="#" className="list-group-item list-group-item-action flex-column align-items-start border-0" style={{padding: '5%'}} id="hotHeader">
                                 <p>Hot</p>
                             </a>
-                            {hotPostsArr.map((post) => (
-                                <a href={`/post?permlink=${post.permlink}&author=${post.author}`} className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5%'}}>
+                            {sidePostsTwo.map((post) => (
+                                <a href={`/post?permlink=${post.permlink}&author=${post.author}`} className="list-group-item list-group-item-action flex-column align-items-start border-0" style={{padding: '5%'}}>
                                     <div className="d-flex w-100 justify-content-between">
                                         <h6 className="mb-1"  style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}>{post.title}</h6>
                                     </div>
