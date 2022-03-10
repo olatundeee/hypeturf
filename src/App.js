@@ -59,10 +59,10 @@ function logout() {
 
 function App() {
   
-  /*if (window.location.protocol === 'http:') {
+  if (window.location.protocol === 'http:' && !window.location.href.includes('localhost:3000')) {
     let currentUrl = window.location.href
     window.location.replace('https://' + currentUrl.split('://')[1])
-  }*/
+  }
 
   return (
       <div className="App">
