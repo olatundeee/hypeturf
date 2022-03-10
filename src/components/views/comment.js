@@ -30,8 +30,9 @@ function Comment (v) {
 
     return (
         <>
-            {props.comments.map((comment) => (<div className="col-lg-12 col-md-12 col-sm-12" key={comment.permlink} data-author={comment.author} data-parent-author={comment.parent_author} data-parent-permlink ={comment.parent_permlink} style={{margin: "1% 2%"}}>
-                {<div className="card comment-card">
+            {props.comments.map((comment) => (
+            <div className="col-lg-12 col-md-12 col-sm-12" key={comment.permlink} data-author={comment.author} data-parent-author={comment.parent_author} data-parent-permlink ={comment.parent_permlink} style={{margin: "1% 2%"}}>
+                {<div className="card comment-card rounded" style={{marginTop: '2%'}}>
                     <div className="card-body">
                         <div className="card-text text-start" id="comment-body-text" dangerouslySetInnerHTML={createMarkup(comment.body)} />
                         <hr />
@@ -58,13 +59,15 @@ function Comment (v) {
                             title: props.title
                         }} />
                     </div>
+                </div>}
+                <div className="card comment-card border-0" style={{paddingLeft: '5%'}}>
                     <ChildComment props={{
                         author: comment.author,
                         permlink: comment.permlink,
                         parent_author: comment.parent_author,
                         parent_permlink: comment.parent_permlink
                     }} />
-                </div>}
+                </div>
             </div>))}
         </>
     )   

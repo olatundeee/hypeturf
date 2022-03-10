@@ -525,15 +525,15 @@ function Post() {
   return (
       
 
-    <div className="post-detail" id="post-page-content" style={{padding: '5%'}}>
+    <div className="post-detail" id="post-page-content" style={{padding: '5% 2%'}}>
         <div className="row">
             <div className="col-lg-2 col-sm-12 col-md-12 d-none d-sm-none d-md-none d-lg-block">
-                <div className="card mb-3">
-                    <h4 className="card-header hot"  style={{color: '#1A2238', textDecoration: 'none !important', padding: '5%'}} className="post-title">More from @{post.author}</h4>
+                <div className="card mb-3 border-0">
+                    <h4 className="card-header hot border-0"  style={{color: '#1A2238', textDecoration: 'none !important', padding: '5%'}} className="post-title">More from @{post.author}</h4>
                     
-                    <div className="list-group">
+                    <div className="list-group border-0">
                     {morePosts.map((post) => (
-                        <a href={`/post?permlink=${post.permlink}&author=${post.author}`} className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '10%'}}>
+                        <a href={`/post?permlink=${post.permlink}&author=${post.author}`} className="list-group-item list-group-item-action flex-column align-items-start border-0"/*style={{padding: '10%'}}*/>
                             <div className="d-flex w-100 justify-content-between">
                                 <h6 className="mb-1"  style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}}><b>{post.title}</b></h6>
                             </div>
@@ -557,7 +557,7 @@ function Post() {
                 </div>
             </div>
             <div className="col-lg-7 col-md-12 col-sm-12" key={post.permlink} data-author={post.author}>
-                {<div className="card post-card">
+                {<div className="card post-card border-0">
                     <div className="card-header row" style={{backgroundColor: "#1A2238", color: "white", paddingTop: '3%'}}>
                         <div className="text-start col-md-3">
                             <img id="avatar" src={`https://images.hive.blog/u/${post.author}/avatar`} style={{borderRadius: '50%'}} />
@@ -615,11 +615,11 @@ function Post() {
                 </div>}
             </div>
             <div className="col-lg-3 col-sm-12 col-md-12 d-none d-sm-none d-md-none d-lg-block">
-                <div className="card mb-3">
-                    <h4 className="card-header hot"  style={{color: '#1A2238', textDecoration: 'none !important', padding: '5%'}} className="post-title">@{post.author} followers</h4>
+                <div className="card mb-3 border-0">
+                    <h4 className="card-header hot border-0"  style={{color: '#1A2238', textDecoration: 'none !important', padding: '5%'}} className="post-title">@{post.author} followers</h4>
                     <div className="list-group">
                     {followers.map((oneFollower) => (
-                        <a className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5% 10%', cursor: 'pointer'}}>
+                        <a className="list-group-item list-group-item-action flex-column align-items-start border-0" /*style={{padding: '5% 10%', cursor: 'pointer'}}*/>
                             <div className="d-flex w-100 justify-content-between" style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}} data-profile-url={`/u?user=${oneFollower.follower}`} >
                                 <b>{oneFollower.follower}</b>
                                 <Follow props={{
@@ -635,11 +635,11 @@ function Post() {
                     </div>
                 </div>
                 <hr />
-                <div className="card mb-3">
-                    <h4 className="card-header hot"  style={{color: '#1A2238', textDecoration: 'none !important', padding: '5%'}} className="post-title">@{post.author} is following</h4>
+                <div className="card mb-3 border-0">
+                    <h4 className="card-header hot border-0"  style={{color: '#1A2238', textDecoration: 'none !important', padding: '5%'}} className="post-title">@{post.author} is following</h4>
                     <div className="list-group">
                     {following.map((oneFollower) => (
-                        <a className="list-group-item list-group-item-action flex-column align-items-start" style={{padding: '5% 10%', cursor: 'pointer'}}>
+                        <a className="list-group-item list-group-item-action flex-column align-items-start border-0" /*style={{padding: '5% 10%', cursor: 'pointer'}}*/>
                             <div className="d-flex w-100 justify-content-between" style={{cursor: 'pointer !important', color: '#1A2238', textDecoration: 'none !important'}} data-profile-url={`/u?user=${oneFollower.following}`} >
                                 <b>{oneFollower.following}</b>
                                 <Follow props={{
@@ -662,6 +662,7 @@ function Post() {
             <br />
             <br />
 
+            <h6>Comments</h6>
             <Comment props={{
                 comments,
                 title: post.title
