@@ -556,7 +556,7 @@ function Post() {
                     </div>
                 </div>
             </div>
-            <div className="col-lg-7 col-md-12 col-sm-12" key={post.permlink} data-author={post.author}>
+            <div className="col-lg-7 col-md-12 col-sm-12" key={post.permlink} data-author={post.author} id={`${post.author}/${post.permlink}`}>
                 {<div className="card post-card border-0">
                     <div className="card-header row" style={{backgroundColor: "#1A2238", color: "white", paddingTop: '3%'}}>
                         <div className="text-start col-md-3">

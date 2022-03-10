@@ -215,13 +215,9 @@ function ChildComment (v) {
       }, []);
 
     return (
-        <div className="card-body" style={{display: comments.length > 0 ? 'block' : 'none'}}>
-            <div className="card-text text-start" id="child-comments" style={{width: '100% !important'}}>
-                <Comment props={{
-                    comments
-                }} />
-            </div>
-        </div>
+        <Comment props={{
+            comments
+        }} />
     )   
 }
 

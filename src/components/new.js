@@ -35,7 +35,7 @@ const author = getUrlParameter('user')
 
 function New() {
     let [value, setValue] = useState("");
-    let [tags, setTags] =  useState(['hypeturf'])
+    let [tags, setTags] =  useState([''])
     let [communities, setCommunities] = useState([])
     let [chosenCommunity, setChosenCommunity]= useState('')
 
@@ -71,7 +71,8 @@ function New() {
         const colonpermlink = parentPermlinkInitEx.replace(/,/g, '');
         let permlink = colonpermlink.replace(/:/g, '');
         permlink = permlink.replace(/\\|\//g,'') ;
-        const parentPermlink = chosenCommunity.length > 0 ? chosenCommunity : 'ftest'
+        const parentPermlink = chosenCommunity.length > 0 ? chosenCommunity : ''
+        tags = tags.push('hypeturf')
         const jsonMetadata = {tags, app: 'hypeturf/v1' }
         body = body + '<p>Posted from <a href="https://www.hypeturf.io">HypeTurf</a></p>';
 
