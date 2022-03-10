@@ -32,7 +32,7 @@ function Comment (v) {
         <>
             {props.comments.map((comment) => (
             <div className="col-lg-12 col-md-12 col-sm-12" key={comment.permlink} data-author={comment.author} data-parent-author={comment.parent_author} data-parent-permlink ={comment.parent_permlink} style={{margin: "1% 2%"}}>
-                {<div className="card comment-card rounded" style={{marginTop: '2%'}}>
+                {<div className="card comment-card rounded" style={{marginTop: '2%', width: '100%'}}>
                     <div className="card-body">
                         <div className="card-text text-start" id="comment-body-text" dangerouslySetInnerHTML={createMarkup(comment.body)} />
                         <hr />
@@ -60,7 +60,7 @@ function Comment (v) {
                         }} />
                     </div>
                 </div>}
-                <div className="card comment-card border-0" style={{paddingLeft: '5%'}}>
+                <div className="card comment-card border-0" style={{paddingLeft: '5%', width: '100%'}}>
                     <ChildComment props={{
                         author: comment.author,
                         permlink: comment.permlink,
