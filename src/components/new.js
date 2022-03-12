@@ -128,7 +128,7 @@ function New() {
             } else {
                 try {
                     const dybnjg = localStorage.getItem('ajbhs')
-                    const sendPost = await hive.broadcast.commentAsync(dybnjg, parentAuthor, parentPermlink, author, permlink, title, body, JSON.stringify(jsonMetadata))
+                    //const sendPost = await hive.broadcast.commentAsync(dybnjg, parentAuthor, parentPermlink, author, permlink, title, body, JSON.stringify(jsonMetadata))
                     await hive.broadcast.sendAsync({
                         operations: [operation, comment_options]
                       }, {posting: dybnjg});
