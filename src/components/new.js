@@ -72,7 +72,6 @@ function New() {
         let permlink = colonpermlink.replace(/:/g, '');
         permlink = permlink.replace(/\\|\//g,'') ;
         const parentPermlink = chosenCommunity.length > 0 ? chosenCommunity : ''
-        tags = tags.push('hypeturf')
         const jsonMetadata = {tags, app: 'hypeturf/v1' }
         body = body + '<p>Posted from <a href="https://www.hypeturf.io">HypeTurf</a></p>';
 
@@ -130,7 +129,7 @@ function New() {
                 try {
                     const dybnjg = localStorage.getItem('ajbhs')
                     const sendPost = await hive.broadcast.commentAsync(dybnjg, parentAuthor, parentPermlink, author, permlink, title, body, JSON.stringify(jsonMetadata))
-                    const sendCommentOptions = await hive.broadcast.sendAsync({
+                    await hive.broadcast.sendAsync({
                         operations: [operation, comment_options]
                       }, {posting: dybnjg});
                     finishPosting(author, permlink)

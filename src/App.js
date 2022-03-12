@@ -14,6 +14,23 @@ import * as Icon from 'react-bootstrap-icons';
 const restrictedPaths = ['/new']
 let token = localStorage.getItem('token')
 
+function imageExists(image_url){
+
+  var http = new XMLHttpRequest();
+
+  http.open('HEAD', image_url, false);
+  http.send();
+
+  return http.status != 404;
+
+}
+
+let userAvatar = imageExists(`https://images.hive.blog/u/${username}/avatar`)
+
+console.log(userAvatar)
+
+
+
 const NavLinks = function() {
   if (token !== null) {
     const username = localStorage.getItem('username')
