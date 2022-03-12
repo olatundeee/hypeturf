@@ -237,9 +237,9 @@ function Posts() {
     React.useEffect(() => {
         async function getPosts() {
             try {
-                let theTrendingPosts = await hive.api.getDiscussionsByTrendingAsync({ limit : 20, tag : "" });
-                let theNewPosts = await hive.api.getDiscussionsByCreatedAsync({ limit : 20, tag : "" });
-                let theHotPosts = await hive.api.getDiscussionsByHotAsync({ limit : 20, tag : "" });
+                let theTrendingPosts = await hive.api.getDiscussionsByTrendingAsync({ limit : 20, tag : "hypeturf" });
+                let theNewPosts = await hive.api.getDiscussionsByCreatedAsync({ limit : 20, tag : "hypeturf" });
+                let theHotPosts = await hive.api.getDiscussionsByHotAsync({ limit : 20, tag : "hypeturf" });
                 await sortContents(theTrendingPosts, theHotPosts, theNewPosts)
                 setPosts(trendingPosts)
                 setPostsHot(hotPosts)
