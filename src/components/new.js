@@ -4,6 +4,7 @@ import ops from "../services/hiveOps"
 import SimpleMdeReact from "react-simplemde-editor";
 import { InputTags } from 'react-bootstrap-tagsinput'
 import 'react-bootstrap-tagsinput/dist/index.css'
+import randomstring from 'randomstring';
 
 // components
 
@@ -65,13 +66,11 @@ function New() {
         const title = document.getElementById('postTitle').value
         let body = value;
         const parentAuthor = '';
-        const parentTitleLower = title.toLowerCase();         
-        const parentPermlinkInit = parentTitleLower.replace(/ /g, '-');
-        const parentPermlinkInitEx = parentPermlinkInit.replace(/'?!.`;:/g, '');        
-        const colonpermlink = parentPermlinkInitEx.replace(/,/g, '');
-        let permlink = colonpermlink.replace(/:/g, '');
-        permlink = permlink.replace(/\\|\//g,'') ;
-        const parentPermlink = chosenCommunity.length > 0 ? chosenCommunity : ''
+        let permlink = randomstring.generate({
+            length: 8,
+            charset: 'alphabetic'
+        }).toLowerCase();
+        const parentPermlink = chosenCommunity.length > 0 ? chosenCommunity : tags[0]
         const jsonMetadata = {tags, app: 'hypeturf/v1' }
         body = body + '<p>Posted from <a href="https://www.hypeturf.io">HypeTurf</a></p>';
 
