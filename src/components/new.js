@@ -36,7 +36,7 @@ const author = getUrlParameter('user')
 
 function New() {
     let [value, setValue] = useState("");
-    let [tags, setTags] =  useState([''])
+    let [tags, setTags] =  useState(['hypeturf'])
     let [communities, setCommunities] = useState([])
     let [chosenCommunity, setChosenCommunity]= useState('')
 
