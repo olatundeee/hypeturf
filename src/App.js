@@ -13,6 +13,7 @@ import * as Icon from 'react-bootstrap-icons';
 
 const restrictedPaths = ['/new']
 let token = localStorage.getItem('token')
+const username = localStorage.getItem('username')
 
 function imageExists(image_url){
 
@@ -33,7 +34,6 @@ console.log(userAvatar)
 
 const NavLinks = function() {
   if (token !== null) {
-    const username = localStorage.getItem('username')
     return (<>
               <li className="nav-item">
                 <a className="nav-link text-white" aria-current="page" href={"/u?user=" + username}>Profile < Icon.Person /></a>
