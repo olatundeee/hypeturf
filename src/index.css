@@ -56,7 +56,8 @@ code {
 }
 
 .trending-posts {
-  padding: 0 5%;
+  width: 100%;
+  padding: 0 3%;
 }
 
 #login-content {

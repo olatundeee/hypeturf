@@ -50,8 +50,17 @@ function ProfileHeader(v) {
                     <li className="nav-item">
                         <a className="nav-link" aria-current="page" href={`/p?user=${profile}`} style={{color: 'white'}}>Posts</a>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href={`/replies?user=${profile}`} tabindex="-1" aria-disabled="true" style={{color: 'white'}}>Replies</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href={`/wallet?user=${profile}`} tabindex="-1" aria-disabled="true" style={{color: 'white'}}>Wallet</a>
+                    </li>
                     {/*<li className="nav-item">
                         <a className="nav-link" href={`/u/promotions?user=${profile}`} tabindex="-1" aria-disabled="true" style={{color: 'white'}}>Promotions</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href={`/comments?user=${profile}`} tabindex="-1" aria-disabled="true" style={{color: 'white'}}>Comments</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#" style={{color: 'white'}}>Following</a>
@@ -63,7 +72,7 @@ function ProfileHeader(v) {
                         <a className="nav-link" href="#" tabindex="-1" aria-disabled="true" style={{color: 'white'}}>Wallet</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#" tabindex="-1" aria-disabled="true" style={{color: 'white'}}>Naira P2P Exchange</a>
+                        <a className="nav-link" href="#" tabindex="-1" aria-disabled="true" style={{color: 'white'}}>P2P Exchange</a>
                     </li>*/}
                 </ul>
             </div>

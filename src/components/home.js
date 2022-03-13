@@ -319,7 +319,7 @@ function Posts() {
                 <hr />
                 <br />
                 <br />
-                <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block" style={{width: '22%'}}>
+                <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block" style={{width: '25%'}}>
                     <div className="card border-0 mb-3" style={{margin: '5% 0'}}>
                         <div className="list-group">
                             <a href="#" className="list-group-item list-group-item-action flex-column align-items-start border-0" style={{padding: '5%'}} id="newHeader">
@@ -416,7 +416,7 @@ function Posts() {
                         ))}
                     </div>
                 </div>
-                <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block" style={{width: '22%'}}>
+                <div className="col-lg-3 d-none d-sm-none d-md-none d-lg-block" style={{width: '25%'}}>
                     <div className="card border-0 mb-3" style={{margin: '5% 0'}}>
                         <div className="list-group">
                             <a href="#" className="list-group-item list-group-item-action flex-column align-items-start border-0" style={{padding: '5%'}} id="hotHeader">

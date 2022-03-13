@@ -9,6 +9,8 @@ import Post from "./components/post"
 import New from "./components/new"
 import Profile from "./components/profile"
 import UserPosts from "./components/userPosts";
+import Wallet from "./components/wallet";
+import UserReplies from "./components/userReplies";
 import * as Icon from 'react-bootstrap-icons';
 
 const restrictedPaths = ['/new']
@@ -115,6 +117,8 @@ function App() {
               <Route path="/new" element={<New />} />
               <Route path="/u" element={<Profile />} />
               <Route path="/p" element={<UserPosts />} />
+              <Route path="/replies" element={<UserReplies />} />
+              <Route path="/wallet" element={<Wallet />} />
             </Routes>
         </div>
       </div>

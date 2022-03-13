@@ -359,6 +359,105 @@ const ops = {
         )
 
         return posts.data.result
+    },
+    getWalletData: async function(profile) {
+        const username = profile
+
+        const getAccount = await hive.api.getAccountsAsync([username]);
+
+        const vestingShares = getAccount["0"].vesting_shares;
+        const delegatedVestingShares = getAccount["0"].delegated_vesting_shares;
+        const receivedVestingShares = getAccount["0"].received_vesting_shares;
+
+        const dynamicGlobalProps = await hive.api.getDynamicGlobalPropertiesAsync();
+        const totalVestingShares = dynamicGlobalProps.total_vesting_shares;
+        const totalVestingFund = dynamicGlobalProps.total_vesting_fund_hive;
+
+        const hivePower = hive.formatter.vestToHive(vestingShares, totalVestingShares, totalVestingFund);
+        const delegatedHivePower = hive.formatter.vestToHive((receivedVestingShares.split(' ')[0] - delegatedVestingShares.split(' ')[0]) + ' VESTS', totalVestingShares, totalVestingFund);
+
+
+        const totalHive = parseFloat(getAccount[0].balance.split(' ')[0]) + hivePower
+
+
+        const exchangeRate = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=hive%2Chive_dollar&vs_currencies=usd');
+
+        const hiveInDollars = totalHive * exchangeRate.data.hive.usd
+        const hbdInDollars = parseFloat(getAccount[0].balance.split(' ')[0]) * exchangeRate.data.hive_dollar.usd
+
+        const estimatedAccountValue = hiveInDollars + hbdInDollars
+
+        // vesting withdrawal manager
+
+        const pendingVestWithdraw = getAccount["0"].to_withdraw
+        const nextVestingWithdrawal = getAccount[0].next_vesting_withdrawal
+
+        const vestingWithdrawalRate = getAccount[0].vesting_withdraw_rate
+
+        const vestingWithdrawalHive = hive.formatter.vestToHive(vestingWithdrawalRate, totalVestingShares, totalVestingFund).toFixed(3);
+
+        let pendingVestWithdrawStat
+
+        if (pendingVestWithdraw > 0) {
+            pendingVestWithdrawStat = true
+        } else {
+            pendingVestWithdrawStat = false
+        }
+
+        let savingsWithdrawStat
+        const pendingSavingsWithdrawal = getAccount[0].savings_withdraw_requests
+
+        if (pendingSavingsWithdrawal > 0) {
+            savingsWithdrawStat = true
+        } else {
+            savingsWithdrawStat = false
+        }
+
+
+        const todayDate = new Date()
+
+        const withdrawalTimeDiff = new Date(nextVestingWithdrawal).getTime() - todayDate.getTime()
+
+        const withdrawalDayDiff = withdrawalTimeDiff / (1000 * 3600 * 24);
+
+        let finalTimeInterval
+
+        if (withdrawalDayDiff > 1.0) {
+            finalTimeInterval = `${Math.round(withdrawalDayDiff)} days`
+        }
+
+        if (withdrawalDayDiff < 1) {
+            finalTimeInterval = `${Math.round(withdrawalTimeDiff)} hrs`
+        }
+
+        // vesting withdrawal manager
+
+
+
+        const rewardHive = getAccount[0].reward_hive_balance
+        const rewardHBD = getAccount[0].reward_hbd_balance
+        const rewardVesting = getAccount[0].reward_vesting_hive
+
+        const walletData = {
+            hiveBalance: parseFloat(getAccount[0].balance).toFixed(3),
+            hbdBalance: parseFloat(getAccount[0].hbd_balance).toFixed(3),
+            hbdSavings: parseFloat(getAccount[0].savings_hbd_balance).toFixed(3),
+            hivePower: parseFloat(hivePower).toFixed(3),
+            delegatedHivePower: parseFloat(delegatedHivePower).toFixed(3),
+            estimatedAccountValue: parseFloat(estimatedAccountValue).toFixed(3),
+            pendingVestWithdraw,
+            pendingVestWithdrawStat,
+            nextVestingWithdrawal,
+            vestingWithdrawalRate,
+            finalTimeInterval,
+            vestingWithdrawalHive,
+            savingsWithdrawStat,
+            rewardHive,
+            rewardHBD,
+            rewardVesting
+        }
+
+        return walletData
     }
 }
 
