@@ -135,106 +135,109 @@ function Wallet() {
                     <PulseLoader color={color} loading={loading} css={override} size={50} />
                 </div>
 
-                <div class="wallet-area" style={{padding: '3% 10%', fontSize: '12px'}}>
-                    <div class="row">
-                        <div class="card col-lg-12 col-md-12 col-sm-12 wallet-info-area">
-                            <div class="card-body power-down-notifier">
-                                <h6 const="user-info-area">@<span class="username-text">{profile}</span>'s Wallet</h6>
+                <div className="wallet-area" style={{padding: '3% 10%', fontSize: '12px'}}>
+                    <div className="row">
+                        <div className="card col-lg-12 col-md-12 col-sm-12 wallet-info-area">
+                            <div className="card-body">
+                                <p>This page is still in development so all the features won't work yet</p>
                             </div>
-                            <div class="card-body power-down-notifier">
+                            <div className="card-body power-down-notifier">
+                                <h6 const="user-info-area">@<span className="username-text">{profile}</span>'s Wallet</h6>
+                            </div>
+                            <div className="card-body power-down-notifier">
                                 <p>Your next power down is scheduled to happen in approximately {walletData.finalTimeInterval }. About  {walletData.vestingWithdrawalHive} HIVE</p>
                             </div>
-                            <div class="card-body row rewards-notifier">
-                                <div class="col-8">
-                                    <p><span class="reward-hive">{ walletData.rewardHive }</span>, <span class="reward-hbd">{ walletData.rewardHBD }</span>, <span class="reward-hp">{ walletData.rewardVesting }</span></p>
+                            <div className="card-body row rewards-notifier">
+                                <div className="col-8">
+                                    <p><span className="reward-hive">{ walletData.rewardHive }</span>, <span className="reward-hbd">{ walletData.rewardHBD }</span>, <span className="reward-hp">{ walletData.rewardVesting }</span></p>
                                 </div>
-                                <div class="col-4">
+                                <div className="col-4">
                                     <center>
-                                        <button type="button" class="btn btn-primary claim-rewards">Claim</button>
+                                        <button type="button" className="btn btn-primary claim-rewards">Claim</button>
                                     </center>
                                 </div>
                             </div>
                         </div>
-                        <div class="card col-lg-12 col-md-12 col-sm-12 token-area">
-                            <div class="card-body">
-                                <div class="row container">
-                                    <div class="col-lg-8 col-md-8 col-sm-12 text-left">
-                                        <h5 class="text-left">Hive(Liquid)</h5>
-                                        <p class="text-left">Liquid tokens that can be converted to Hive Power(HP) by powering up, or to other cryptocurrencies by trading on HIVE listed exchanges</p>
+                        <div className="card col-lg-12 col-md-12 col-sm-12 token-area">
+                            <div className="card-body">
+                                <div className="row container">
+                                    <div className="col-lg-8 col-md-8 col-sm-12 text-left">
+                                        <h5 className="text-left">Hive(Liquid)</h5>
+                                        <p className="text-left">Liquid tokens that can be converted to Hive Power(HP) by powering up, or to other cryptocurrencies by trading on HIVE listed exchanges</p>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12 text-right currency-area">
-                                        <div class="dropdown">    
-                                            <h6 class="text-right dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{cursor: "pointer"}}>{ walletData.hiveBalance } HIVE</h6>
-                                            <div class="dropdown-menu float-right" aria-labelledby="dropdownMenuButton" style={{marginLeft: "40%"}}>
-                                            <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#trfHiveModal">Transfer</a>
-                                            <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#trfHiveToVestModal">Power Up</a>
+                                    <div className="col-lg-4 col-md-4 col-sm-12 text-right currency-area">
+                                        <div className="dropdown">    
+                                            <h6 className="text-right dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{cursor: "pointer"}}>{ walletData.hiveBalance } HIVE</h6>
+                                            <div className="dropdown-menu float-right" aria-labelledby="dropdownMenuButton" style={{marginLeft: "40%"}}>
+                                            <a className="dropdown-item" href="#"  data-toggle="modal" data-target="#trfHiveModal">Transfer</a>
+                                            <a className="dropdown-item" href="#"  data-toggle="modal" data-target="#trfHiveToVestModal">Power Up</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <hr />
-                            <div class="card-body">
-                                <div class="row container">
-                                    <div class="col-lg-8 col-md-8 col-sm-12 text-left">
-                                        <h5 class="text-left">Hive Power(HP)(Staked)</h5>
-                                        <p class="text-left">Hive power is accumulated as rewards from curation and content creation. <br /> Users with more Hive Power will earn more Hive, so endeavor to power up some Hive as much as you can to increase your potential rewards</p>
+                            <div className="card-body">
+                                <div className="row container">
+                                    <div className="col-lg-8 col-md-8 col-sm-12 text-left">
+                                        <h5 className="text-left">Hive Power(HP)(Staked)</h5>
+                                        <p className="text-left">Hive power is accumulated as rewards from curation and content creation. <br /> Users with more Hive Power will earn more Hive, so endeavor to power up some Hive as much as you can to increase your potential rewards</p>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12 text-right currency-area">
-                                        <div class="dropdown">    
-                                            <h6 class="text-right dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{cursor: "pointer"}}><span class="user-hp">{ walletData.hivePower }</span> HP<br /><i>({ walletData.delegatedHivePower } HP)</i></h6>
-                                            <div class="dropdown-menu float-right" aria-labelledby="dropdownMenuButton" style={{marginLeft: "40%"}}>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#unStakeModal">Power Down</a>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delegationModal">Delegate</a>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#unStakeModal" id="cancel-unstake">Cancel Power Down</a>
+                                    <div className="col-lg-4 col-md-4 col-sm-12 text-right currency-area">
+                                        <div className="dropdown">    
+                                            <h6 className="text-right dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{cursor: "pointer"}}><span className="user-hp">{ walletData.hivePower }</span> HP<br /><i>({ walletData.delegatedHivePower } HP)</i></h6>
+                                            <div className="dropdown-menu float-right" aria-labelledby="dropdownMenuButton" style={{marginLeft: "40%"}}>
+                                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#unStakeModal">Power Down</a>
+                                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#delegationModal">Delegate</a>
+                                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#unStakeModal" id="cancel-unstake">Cancel Power Down</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <hr />
-                            <div class="card-body">
-                                <div class="row container">
-                                    <div class="col-lg-8 col-md-8 col-sm-12 text-left">
-                                        <h5 class="text-left">Hive Backed Dollars(HBD)</h5>
-                                        <p class="text-left">Can be converted to liquid HIVE</p>
+                            <div className="card-body">
+                                <div className="row container">
+                                    <div className="col-lg-8 col-md-8 col-sm-12 text-left">
+                                        <h5 className="text-left">Hive Backed Dollars(HBD)</h5>
+                                        <p className="text-left">Can be converted to liquid HIVE</p>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12 text-right">
-                                        <div class="dropdown">    
-                                            <h6 class="text-right dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{cursor: "pointer"}}>{ walletData.hbdBalance } HBD</h6>
-                                            <div class="dropdown-menu float-right" aria-labelledby="dropdownMenuButton" style={{marginLeft: "40%"}}>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#trfHBDModal">Transfer</a>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#trfHBDSavingsModal">Transfer To Savings</a>
+                                    <div className="col-lg-4 col-md-4 col-sm-12 text-right">
+                                        <div className="dropdown">    
+                                            <h6 className="text-right dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{cursor: "pointer"}}>{ walletData.hbdBalance } HBD</h6>
+                                            <div className="dropdown-menu float-right" aria-labelledby="dropdownMenuButton" style={{marginLeft: "40%"}}>
+                                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#trfHBDModal">Transfer</a>
+                                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#trfHBDSavingsModal">Transfer To Savings</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <hr />
-                            <div class="card-body">
-                                <div class="row container">
-                                    <div class="col-lg-8 col-md-8 col-sm-12 text-left">
-                                        <h5 class="text-left">Hive Savings</h5>
-                                        <p class="text-left">Save your HIVE tokens</p>
+                            <div className="card-body">
+                                <div className="row container">
+                                    <div className="col-lg-8 col-md-8 col-sm-12 text-left">
+                                        <h5 className="text-left">Hive Savings</h5>
+                                        <p className="text-left">Save your HIVE tokens</p>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12 text-right">
-                                        <div class="dropdown">    
-                                            <h6 class="text-right dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{cursor: "pointer"}}>{ walletData.hbdSavings } HBD</h6>
-                                            <div class="dropdown-menu float-right" aria-labelledby="dropdownMenuButton" style={{marginLeft: "40%"}}>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#withdrawHBDSavingsModal">Withdraw</a>
+                                    <div className="col-lg-4 col-md-4 col-sm-12 text-right">
+                                        <div className="dropdown">    
+                                            <h6 className="text-right dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{cursor: "pointer"}}>{ walletData.hbdSavings } HBD</h6>
+                                            <div className="dropdown-menu float-right" aria-labelledby="dropdownMenuButton" style={{marginLeft: "40%"}}>
+                                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#withdrawHBDSavingsModal">Withdraw</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <hr />
-                            <div class="card-body">
-                                <div class="row container">
-                                    <div class="col-lg-8 col-md-8 col-sm-12 text-left">
-                                        <h5 class="text-left">Estimated Account Value</h5>
+                            <div className="card-body">
+                                <div className="row container">
+                                    <div className="col-lg-8 col-md-8 col-sm-12 text-left">
+                                        <h5 className="text-left">Estimated Account Value</h5>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12 text-right">
-                                        <h6 class="text-right">${ walletData.estimatedAccountValue }</h6>
+                                    <div className="col-lg-4 col-md-4 col-sm-12 text-right">
+                                        <h6 className="text-right">${ walletData.estimatedAccountValue }</h6>
                                     </div>
                                 </div>
                             </div>
