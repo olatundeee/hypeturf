@@ -53,10 +53,10 @@ function ProfileHeader(v) {
                     <li className="nav-item">
                         <a className="nav-link" href={`/replies?user=${profile}`} tabindex="-1" aria-disabled="true" style={{color: 'white'}}>Replies</a>
                     </li>
+                    {/*
                     <li className="nav-item">
                         <a className="nav-link" href={`/wallet?user=${profile}`} tabindex="-1" aria-disabled="true" style={{color: 'white'}}>Wallet</a>
-                    </li>
-                    {/*<li className="nav-item">
+                    </li><li className="nav-item">
                         <a className="nav-link" href={`/u/promotions?user=${profile}`} tabindex="-1" aria-disabled="true" style={{color: 'white'}}>Promotions</a>
                     </li>
                     <li className="nav-item">
