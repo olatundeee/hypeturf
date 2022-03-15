@@ -141,4 +141,8 @@ img {
   .follow-badge {
     padding: 30% !important;
   }
+
+  .trending-posts {
+    width: inherit;
+  }
 }

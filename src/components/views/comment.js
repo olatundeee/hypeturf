@@ -45,8 +45,8 @@ function Comment (v) {
                                 <span className="pending-payout comment-action" style={{fontSize: '10px', display: 'inline-flex', paddingTop: '1%', width: '50%'}}><b className="text-center">{comment.pendingPayout}</b></span>
                             </div>
                         </div>
-                        <div className="card-footer comments-footer-area" style={{backgroundColor: "#1A2238"}}>
-                            <a className="vote-post text-white comment-action" style={{width: '50%', display: 'inline-flex'}}>
+                        <div className="card-footer comments-footer-area row" style={{backgroundColor: "#1A2238"}}>
+                            <a className="vote-post text-white comment-action" style={{width: '50%', display: 'inherit', paddingTop: '1%'}}>
                                 <Vote props={{
                                     author: comment.author,
                                     permlink: comment.permlink,
@@ -54,13 +54,15 @@ function Comment (v) {
                                     voter: loggedInUser
                                 }} />
                             </a>
-                            <ReplyLink props={{
-                                id: comment.permlink + comment.author,
-                                isComment: true,
-                                parent_author: comment.author,
-                                parent_permlink: comment.permlink,
-                                title: props.title
-                            }} />
+                            <a className="vote-post text-white comment-action" style={{width: '50%', display: 'inherit', paddingTop: '1%'}}>
+                                <ReplyLink props={{
+                                    id: comment.permlink + comment.author,
+                                    isComment: true,
+                                    parent_author: comment.author,
+                                    parent_permlink: comment.permlink,
+                                    title: props.title
+                                }} />
+                            </a>                           
                         </div>
                     </div>}
                     <ChildComment props={{

@@ -458,6 +458,9 @@ const ops = {
         }
 
         return walletData
+    },
+    claimRewards: async function (user) {
+        
     }
 }
 

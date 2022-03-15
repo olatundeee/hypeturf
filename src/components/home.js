@@ -389,7 +389,7 @@ function Posts() {
                                 </div>
                                 
                                 <div className="card-footer post-footer-area row" style={{backgroundColor: "#1A2238"}}>
-                                    <div className="vote-post text-white col" id={`${post.author}${post.permlink}`}>
+                                    <div className="vote-post text-white col" id={`${post.author}${post.permlink}`} style={{display: 'inherit', paddingTop: '1%'}}>
                                         <Vote props={{
                                             author: post.author,
                                             permlink: post.permlink,

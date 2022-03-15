@@ -590,7 +590,7 @@ function Post() {
                     </div>
                     
                     <div className="card-footer post-footer-area row" style={{backgroundColor: "#1A2238"}}>
-                        <div className="vote-post text-white col">
+                        <div className="vote-post text-white col" style={{display: 'inherit', paddingTop: '1%'}}>
                             <Vote props={{
                                 author,
                                 permlink,
@@ -667,32 +667,6 @@ function Post() {
                 comments,
                 title: post.title
             }} />
-
-            {/*comments.map((comment) => (<div className="col-lg-12 col-sm-12 container" key={comment.permlink} data-author={comment.author} data-parent-author={comment.parent_author} style={{margin: "3% 0"}}>
-                {<div className="card comment-card">
-                    <div className="card-body post-card-body">
-                        <div className="card-text text-start" id="comment-body-text" dangerouslySetInnerHTML={createMarkup(comment.body)} />
-                    </div>
-                    <div className="card-footer text-center comments-footer-area row" style={{backgroundColor: "#1A2238"}}>
-                        <div className="vote-post text-white text-center comment-action col-1">
-                            <Vote props={{
-                                author: comment.author,
-                                permlink: comment.permlink,
-                                voted: comment.voted,
-                                voter: loggedInUser
-                            }} />
-                        </div>
-                        <div className="comment-author text-center comment-action col-3" href={"/u?user=" + comment.author} style={{cursor: 'pointer !important', color: '#fff', textDecoration: 'none !important', display: 'inline-flex'}}>
-                            <img src={`https://images.hive.blog/u/${comment.author}/avatar`} style={{borderRadius: '50%'}} />
-                        </div>
-                        <div className="comment-author text-center comment-action col-1" href={"/u?user=" + comment.author} style={{cursor: 'pointer !important', color: '#fff', textDecoration: 'none !important', display: 'inline-flex'}}>
-                            <small>@{comment.author}</small> 
-                        </div>
-                        <div className="pending-payout text-white text-center comment-action col-1" style={{fontSize: '10px', display: 'inline-flex', paddingTop: '1%'}}><b className="text-center">{comment.pendingPayout}</b></div>
-                        <ReplyLink className="col-1" style={{fontSize: '10px', display: 'inline-flex', paddingTop: '1%'}} />
-                    </div>
-                </div>}
-            </div>))*/}
             <br />
             <br />
         </div>
